@@ -1,3 +1,5 @@
+-- Cross-Platform Neovim Config
+-- Documentation & Mappings: https://github.com/GoldnRam/my_configs/blob/main/nvim/README.md
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -- 1. DYNAMIC PATH HANDLING (Linux & Windows 11)
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
