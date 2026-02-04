@@ -125,28 +125,3 @@ Open Neovim and run the following commands to install plugins and language serve
 
 ---
 
-## How It Works (Internal Logic)
-
-The `init.lua` is self-referential regarding path management.
-
-**Section 1: Dynamic Paths**
-This block automatically detects if it is running on Linux or Windows and adjusts the plugin storage path (`data_path`) accordingly. This prevents directory mismatch errors when syncing this repo across OSs.
-
-```lua
-local data_path = vim.fn.stdpath('data') .. '/site/plugged'
-local Plug = vim.fn['plug#']
-vim.call('plug#begin', data_path)
-
-```
-
-**Section 3: Mapping Function**
-To keep the code clean, a local helper function `map()` is defined to handle keybinding verbosity.
-
-```lua
-local function map(mode, lhs, rhs, opts)
-    vim.keymap.set(mode, lhs, rhs, opts or {silent = true})
-end
-
-```
-
-
