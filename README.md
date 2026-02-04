@@ -105,7 +105,7 @@ Open Neovim and run the following commands to install plugins and language serve
 
 | Mapping | Action | Description |
 | --- | --- | --- |
-| `,sh` | `Toggle Terminal` | Open/Hide the integrated terminal drawer. |
+| `Ctrl + \` | `Toggle Terminal` | Open/Hide the integrated terminal drawer. |
 | `Esc` | `Normal Mode` | Exit typing mode to scroll output (use `i` to type again). |
 
 ### Window Management
@@ -120,7 +120,7 @@ Open Neovim and run the following commands to install plugins and language serve
 
 | Mapping | Action | Description |
 | --- | --- | --- |
-| `,r` | `go run` | Run the current main file. |
+| `,r` | `go run` | Run the current main file (Asynchronous Split). |
 | `,t` | `go test` | Run tests for the current package. |
 
 ---
