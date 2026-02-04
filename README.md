@@ -20,6 +20,7 @@ Before linking the configuration, ensure the underlying engines are installed.
 | **Node.js** | LSP Engine (CoC) | `sudo apt install nodejs` | `winget install CoreyButler.NVMforWindows` |
 | **Ripgrep** | Project Search | `sudo apt install ripgrep` | `winget install burke.ripgrep` |
 | **FZF** | Fuzzy Finder | `sudo apt install fzf` | `winget install junegunn.fzf` |
+| **Go Tools**| Go Analysis (gopls)| `go install golang.org/x/tools/gopls@latest` | `go install golang.org/x/tools/gopls@latest` |
 
 ## Installation
 
@@ -49,15 +50,14 @@ Don't copy the file; symlink it.
 
 ```bash
 mkdir -p ~/.config/nvim
-ln -s ~/User/.my_configs/nvim/init.lua ~/.config/nvim/init.lua
-
+# Note: Adjust '~/Code/' if your repo is elsewhere
+ln -s ~/Code/.my_configs/nvim/init.lua ~/.config/nvim/init.lua
 ```
 
 **Windows (PowerShell Admin):**
 
 ```powershell
 New-Item -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\nvim\init.lua" -Target "C:\Users\YOUR_USER\Code\.my_configs\nvim\init.lua"
-
 ```
 
 ### 3. Initialize
@@ -66,9 +66,10 @@ Open Neovim and run the following commands to install plugins and language serve
 
 ```vim
 :PlugInstall
-:CocInstall coc-go coc-pyright coc-json
+:CocInstall coc-go coc-pyright coc-json coc-pairs
 
 ```
+*Note: If Go autocomplete does not work immediately, ensure gopls is in your path by running go install golang.org/x/tools/gopls@latest in your terminal.*
 
 ---
 
