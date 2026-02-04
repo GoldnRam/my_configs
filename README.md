@@ -44,7 +44,7 @@ iwr -useb [https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim](
 
 ### 2. Symlink the Config
 
-Don't copy the file; symlink it.
+Don't copy the file; symlink it so your repo stays the source of truth.
 
 **Linux:**
 
@@ -52,15 +52,17 @@ Don't copy the file; symlink it.
 mkdir -p ~/.config/nvim
 # Note: Adjust '~/Code/' if your repo is elsewhere
 ln -s ~/Code/.my_configs/nvim/init.lua ~/.config/nvim/init.lua
+
 ```
 
 **Windows (PowerShell Admin):**
 
 ```powershell
 New-Item -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\nvim\init.lua" -Target "C:\Users\YOUR_USER\Code\.my_configs\nvim\init.lua"
+
 ```
 
-### 3. Initialize
+### 3. Initialize & Install Engines
 
 Open Neovim and run the following commands to install plugins and language servers:
 
@@ -69,7 +71,8 @@ Open Neovim and run the following commands to install plugins and language serve
 :CocInstall coc-go coc-pyright coc-json coc-pairs
 
 ```
-*Note: If Go autocomplete does not work immediately, ensure gopls is in your path by running go install golang.org/x/tools/gopls@latest in your terminal.*
+
+*Note: If Go autocomplete does not work immediately, ensure `gopls` is in your path.*
 
 ---
 
@@ -86,15 +89,24 @@ Open Neovim and run the following commands to install plugins and language serve
 | `,g` | `:Rg` | **Ripgrep**. Search for text *inside* files across the whole project. |
 | `F3` | `:NERDTreeToggle` | Toggle the file tree (use sparingly). |
 
-### Intelligence (LSP)
+### Intelligence (LSP) & Autocomplete
 
 | Mapping | Action | Description |
 | --- | --- | --- |
 | `gd` | `Go to Definition` | Teleport to where the function/variable is defined. |
 | `gr` | `Find References` | List every file where this function is used. |
+| `,a` | `Quick Fix` | Apply code actions (e.g. fix missing imports). |
 | `K` | `Hover Doc` | Show documentation/types in a popup. |
 | `[g` / `]g` | `Prev/Next Error` | Jump instantly to syntax errors. |
-| `Ctrl+o` | `Jump Back` | Return to previous location after using `gd`. |
+| `Tab` | `Next Suggestion` | Cycle through autocomplete menu options. |
+| `Enter` | `Confirm` | Select the highlighted autocomplete suggestion. |
+
+### Integrated Terminal
+
+| Mapping | Action | Description |
+| --- | --- | --- |
+| `,sh` | `Toggle Terminal` | Open/Hide the integrated terminal drawer. |
+| `Esc` | `Normal Mode` | Exit typing mode to scroll output (use `i` to type again). |
 
 ### Window Management
 
@@ -113,11 +125,11 @@ Open Neovim and run the following commands to install plugins and language serve
 
 ---
 
-## How It Works
+## How It Works (Internal Logic)
 
 The `init.lua` is self-referential regarding path management.
 
-
+**Section 1: Dynamic Paths**
 This block automatically detects if it is running on Linux or Windows and adjusts the plugin storage path (`data_path`) accordingly. This prevents directory mismatch errors when syncing this repo across OSs.
 
 ```lua
@@ -127,7 +139,7 @@ vim.call('plug#begin', data_path)
 
 ```
 
-
+**Section 3: Mapping Function**
 To keep the code clean, a local helper function `map()` is defined to handle keybinding verbosity.
 
 ```lua
